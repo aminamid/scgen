@@ -1,0 +1,67 @@
+scenario:
+  times: 1
+  sequence:
+    - [ prof0, 10, 100]
+  sequence2:
+    - [ prof1, 100,  3]
+    - [ prof2, 50 ,  3]
+    - [ prof3, 200,  3]
+params:
+    emid: [ tmpl, ["cn=lab_performance_email_{0:0>8},dc=openwave,dc=com","{0}"], [0,10]]
+    emex: [ tmpl, ["lab_performance_emex","{0}"], [60000000,60000100]]
+    ssid: [ tmpl, ["mail=999999{0:0>8}@openwave.com,dc=openwave,dc=com","{0}"], [0,5]]
+    ssex: [ tmpl, ["lab_performance_smex","{0}"], [70000000,70000100]]
+    syid: [ tmpl, ["mail=999999{0:0>8}@openwave.com,dc=openwave,dc=com","{0}"], [5,10]]
+    syex: [ tmpl, ["lab_performance_smex","{0}"], [80000000,80000100]]
+    eattr: [tmpl, ["pushnotifyinfo","{0}"], [0,2]]
+    mailpasswd: [ tmpl, "pass{0:0>8}", [0,50000]]
+    mail: [ tmpl, "pass{0:0>8}", [0,50000]]
+profiles:
+  prof0:
+    mod_em_pushd: { weight: 100,dn: emid, }
+    mod_em_pusha: { weight: 100,dn: emid, }
+    mod_em_prov:  { weight: 100,dn: emid, }
+    add_em_: { weight: 100,   dn: emex, }
+    del_em_: { weight: 100,   dn: emex, }
+    add_ss_: { weight: 100,  dn: ssex, }
+    del_ss_: { weight: 100,   dn: ssex, }
+    add_sy_: { weight: 100,  dn: syex, }
+    del_sy_: { weight: 100,   dn: syex, }
+    mod_ss_: { weight: 100,  dn: ssid, }
+    mod_sy_: { weight: 100,  dn: syid, }
+  prof1:
+    add_em_: { weight: 100,   dn: emex, }
+    mod_em_pushd: { weight: 1002,dn: emid, }
+    mod_em_pusha: { weight: 1002,dn: emid, }
+    mod_em_prov:  { weight: 1002,dn: emid, }
+    del_em_: { weight: 100,   dn: emex, }
+    add_ss_: { weight: 92,  dn: ssex, }
+    mod_ss_: { weight: 23,  dn: ssid, }
+    del_ss_: { weight: 0,   dn: ssex, }
+    add_sy_: { weight: 46,  dn: syid, }
+    mod_sy_: { weight: 23,  dn: syid, }
+    del_sy_: { weight: 0,   dn: syid, }
+  prof2:
+    add_em_: { weight: 0,   dn: emid, }
+    mod_em_pushd: { weight: 638, dn: emid,}
+    mod_em_pusha: { weight: 638, dn: emid,}
+    mod_em_prov:  { weight: 638, dn: emid,}
+    del_em_: { weight: 0,   dn: emid, }
+    add_ss_: { weight: 23,  dn: ssid, }
+    mod_ss_: { weight: 5,   dn: ssid, }
+    del_ss_: { weight: 0,   dn: ssid, }
+    add_sy_: { weight: 9,   dn: syid, }
+    mod_sy_: { weight: 5,   dn: syid, }
+    del_sy_: { weight: 0,   dn: syid, }
+  prof3:
+    add_em_: { weight: 410,  dn: emid, }
+    mod_em_pushd: { weight: 638,  dn: emid,}
+    mod_em_pusha: { weight: 638,  dn: emid,}
+    mod_em_prov : { weight: 638,  dn: emid,}
+    del_em_: { weight: 41,   dn: emid, }
+    add_ss_: { weight: 23,   dn: ssid, }
+    mod_ss_: { weight: 5,    dn: ssid, }
+    del_ss_: { weight: 228,  dn: ssid, }
+    add_sy_: { weight: 9,    dn: syid, }
+    mod_sy_: { weight: 5,    dn: syid, }
+    del_sy_: { weight: 273,  dn: syid, }
